@@ -1,0 +1,9 @@
+# Packages & dependencies
+node_modules/
+
+# Submission archives
+*.zip
+
+# Operating System files
+.DS_Store
+Thumbs.db
