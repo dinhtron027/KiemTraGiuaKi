@@ -1,4 +1,4 @@
-# BÀI THI THỰC HÀNH GIỮA KỲ – HỌC PHẦN LẬP TRÌNH WEB (14113015)
+# BÀI THI THỰC HÀNH GIỮA KỲ – HỌC PHẦN LẬP TRÌNH WEB (020100138304)
 ## DỰ ÁN: WEBSITE HỒ SƠ CÁ NHÂN / MINI PORTFOLIO
 
 - **Trường:** Đại học Gia Định (GDU) - Khoa Công nghệ Thông tin
@@ -129,16 +129,3 @@ Kiểm tra lịch sử commit bằng lệnh:
 ```bash
 git log --oneline
 ```
-
----
-
-## 7. HƯỚNG DẪN NỘP BÀI THI
-
-1. Đổi thông tin MSSV và Họ tên thật trong file `README.md` và `index.html` (nếu cần).
-2. Kiểm tra file nén `MSSV_HoTen.zip` (đã bao gồm thư mục `.git` để giảng viên đối chiếu tiến độ commit).
-3. Đổi tên file zip thành: `<MSSV>_<HoTenKhongDau>.zip` (Ví dụ: `22110000_DinhTrong.zip`).
-4. Nộp file zip lên Google Classroom của lớp học phần Lập trình Web (14113015) theo quy định của giảng viên.
-5. Push mã nguồn lên GitHub:
-   ```bash
-   git push -u origin main
-   ```
