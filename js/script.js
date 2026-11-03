@@ -276,6 +276,175 @@ const initContactForm = () => {
   });
 };
 
+/* =========================================================================
+ * PHẦN 4: JAVASCRIPT NÂNG CAO
+ * ========================================================================= */
+
+/**
+ * 4.14 & 4.15 & 4.16. FETCH API, ASYNC/AWAIT VÀ TRY/CATCH
+ * Đọc dữ liệu từ file js/data.json và hiển thị danh sách dự án lên DOM.
+ * Xử lý lỗi đầy đủ, ghi console.error và hiển thị thông báo lỗi trên UI.
+ */
+const loadProjects = async () => {
+  const container = document.getElementById("projects-container");
+  if (!container) return;
+
+  try {
+    // 1. Gọi fetch() kết hợp await để đọc dữ liệu từ file js/data.json
+    const response = await fetch("js/data.json");
+
+    // 2. Kiểm tra response.ok trước khi xử lý JSON
+    if (!response.ok) {
+      throw new Error(`Không thể nạp dữ liệu! Mã trạng thái HTTP: ${response.status} (${response.statusText})`);
+    }
+
+    // 3. Phân tích dữ liệu JSON trả về
+    const projects = await response.json();
+
+    // Xóa thông báo loading
+    container.innerHTML = "";
+
+    // Kiểm tra nếu mảng dự án rỗng
+    if (!Array.isArray(projects) || projects.length === 0) {
+      const emptyDiv = document.createElement("div");
+      emptyDiv.className = "empty-state";
+      const emptyText = document.createElement("p");
+      emptyText.textContent = "Hiện chưa có dự án nào trong danh sách.";
+      emptyDiv.appendChild(emptyText);
+      container.appendChild(emptyDiv);
+      return;
+    }
+
+    // 4. Render từng dự án thành một card DOM an toàn
+    projects.forEach((project) => {
+      // Thẻ card cha
+      const card = document.createElement("article");
+      card.className = "project-card";
+
+      // Header của card (Năm hoàn thành)
+      const headerDiv = document.createElement("div");
+      headerDiv.className = "project-header";
+
+      const yearBadge = document.createElement("span");
+      yearBadge.className = "project-year";
+      yearBadge.textContent = `Năm: ${project.namHoanThanh}`;
+      headerDiv.appendChild(yearBadge);
+
+      // Tiêu đề dự án
+      const titleElem = document.createElement("h3");
+      titleElem.className = "project-title";
+      titleElem.textContent = project.ten; // DOM an toàn với textContent
+
+      // Mô tả dự án
+      const descElem = document.createElement("p");
+      descElem.className = "project-desc";
+      descElem.textContent = project.moTa || "Dự án phát triển web ứng dụng kiến thức lập trình.";
+
+      // Công nghệ sử dụng
+      const techElem = document.createElement("p");
+      techElem.className = "project-tech";
+      techElem.textContent = project.congNghe;
+
+      // Footer của card (Liên kết xem chi tiết / demo)
+      const footerDiv = document.createElement("div");
+      footerDiv.className = "project-footer";
+
+      const linkElem = document.createElement("a");
+      linkElem.className = "project-link";
+      linkElem.href = "#";
+      linkElem.textContent = "Xem mã nguồn & chi tiết →";
+      linkElem.setAttribute("aria-label", `Xem chi tiết dự án ${project.ten}`);
+      footerDiv.appendChild(linkElem);
+
+      // Ghép nối các phần tử vào card
+      card.appendChild(headerDiv);
+      card.appendChild(titleElem);
+      card.appendChild(descElem);
+      card.appendChild(techElem);
+      card.appendChild(footerDiv);
+
+      // Thêm card vào container
+      container.appendChild(card);
+    });
+
+  } catch (error) {
+    // 4.16. Xử lý lỗi try/catch:
+    // Log lỗi chi tiết ra console
+    console.error("Lỗi khi tải dữ liệu dự án (loadProjects):", error);
+
+    // Hiển thị thông báo thân thiện trên giao diện để trang không bị crash
+    container.innerHTML = "";
+    const errorDiv = document.createElement("div");
+    errorDiv.className = "error-state";
+
+    const errorTitle = document.createElement("p");
+    errorTitle.className = "error-title";
+    errorTitle.textContent = "⚠️ Không thể tải danh sách dự án!";
+
+    const errorDesc = document.createElement("p");
+    errorDesc.textContent = "Vui lòng đảm bảo website được mở bằng Live Server (giao thức HTTP) thay vì file:// để tránh lỗi CORS khi đọc file data.json.";
+
+    errorDiv.appendChild(errorTitle);
+    errorDiv.appendChild(errorDesc);
+    container.appendChild(errorDiv);
+  }
+};
+
+/**
+ * 4.17. LOCALSTORAGE VÀ DARK MODE
+ * Quản lý chuyển đổi giao diện Sáng / Tối và lưu trạng thái bền vững.
+ */
+const initDarkMode = () => {
+  const THEME_KEY = "portfolio-theme";
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  if (!themeToggleBtn) return;
+
+  const themeIcon = themeToggleBtn.querySelector(".theme-icon");
+  const themeText = themeToggleBtn.querySelector(".theme-text");
+
+  // Hàm cập nhật trạng thái giao diện và nội dung nút bấm
+  const applyTheme = (theme) => {
+    if (theme === "dark") {
+      document.body.classList.add("dark-theme");
+      if (themeIcon) themeIcon.textContent = "☀️";
+      if (themeText) themeText.textContent = "Light Mode";
+      themeToggleBtn.setAttribute("title", "Chuyển sang giao diện Sáng (Light Mode)");
+    } else {
+      document.body.classList.remove("dark-theme");
+      if (themeIcon) themeIcon.textContent = "🌙";
+      if (themeText) themeText.textContent = "Dark Mode";
+      themeToggleBtn.setAttribute("title", "Chuyển sang giao diện Tối (Dark Mode)");
+    }
+  };
+
+  // 1. Đọc trạng thái đã lưu trong LocalStorage khi tải trang
+  let savedTheme = "light";
+  try {
+    savedTheme = localStorage.getItem(THEME_KEY) || "light";
+  } catch (err) {
+    console.warn("Không thể truy cập LocalStorage:", err);
+  }
+
+  // Áp dụng chủ đề ngay khi khởi tạo
+  applyTheme(savedTheme);
+
+  // 2. Lắng nghe sự kiện click nút chuyển đổi
+  themeToggleBtn.addEventListener("click", () => {
+    const isCurrentlyDark = document.body.classList.contains("dark-theme");
+    const newTheme = isCurrentlyDark ? "light" : "dark";
+
+    // Cập nhật giao diện
+    applyTheme(newTheme);
+
+    // 3. Lưu trạng thái mới vào LocalStorage
+    try {
+      localStorage.setItem(THEME_KEY, newTheme);
+    } catch (err) {
+      console.warn("Không thể lưu chủ đề vào LocalStorage:", err);
+    }
+  });
+};
+
 /**
  * Xử lý menu responsive trên thiết bị di động (Hamburger Menu)
  */
@@ -303,14 +472,21 @@ const initMobileNav = () => {
   });
 };
 
-// Khởi chạy khi DOM hoàn tất nạp
+// Khởi chạy toàn bộ module khi DOM hoàn tất nạp
 document.addEventListener("DOMContentLoaded", () => {
-  // Render kỹ năng ban đầu
+  // 1. Khởi tạo Dark Mode từ LocalStorage
+  initDarkMode();
+
+  // 2. Render danh sách kỹ năng ban đầu (Phần 3)
   renderSkills("all");
-  // Khởi tạo bộ lọc kỹ năng
   initSkillFilters();
-  // Khởi tạo xử lý form
+
+  // 3. Tải và hiển thị danh sách dự án từ data.json qua Fetch API (Phần 4)
+  loadProjects();
+
+  // 4. Khởi tạo xử lý Form liên hệ & validate (Phần 3)
   initContactForm();
-  // Khởi tạo menu di động
+
+  // 5. Khởi tạo điều hướng menu di động
   initMobileNav();
 });

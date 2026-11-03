@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "ten": "Website Portfolio Cá nhân",
+    "congNghe": "HTML5, SCSS, JavaScript",
+    "namHoanThanh": 2025,
+    "moTa": "Trang web hồ sơ cá nhân chuẩn Semantic HTML5, biên dịch từ SCSS sang CSS, responsive mobile-first và hỗ trợ Dark Mode bền vững qua LocalStorage."
+  },
+  {
+    "id": 2,
+    "ten": "Ứng dụng Quản lý Chi tiêu",
+    "congNghe": "JavaScript, LocalStorage",
+    "namHoanThanh": 2025,
+    "moTa": "Ứng dụng ghi chép thu chi cá nhân hằng ngày, tự động tính tổng ngân sách, lưu trữ trạng thái dữ liệu trên LocalStorage của trình duyệt."
+  },
+  {
+    "id": 3,
+    "ten": "Landing Page Sự kiện",
+    "congNghe": "HTML5, Flexbox, Grid",
+    "namHoanThanh": 2024,
+    "moTa": "Trang giới thiệu sự kiện công nghệ dành cho sinh viên, tối ưu hóa bố cục bằng CSS Flexbox và Grid, hiển thị mượt mà trên đa màn hình."
+  }
+]
