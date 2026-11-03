@@ -2,9 +2,9 @@
 ## DỰ ÁN: WEBSITE HỒ SƠ CÁ NHÂN / MINI PORTFOLIO
 
 - **Trường:** Đại học Gia Định (GDU) - Khoa Công nghệ Thông tin
-- **Học phần:** Lập trình Web (Mã HP: 14113015)
+- **Học phần:** Lập trình Web (Mã HP: 020100138304)
 - **Họ và tên sinh viên:** Đinh Trọng
-- **Mã số sinh viên (MSSV):** `[Vui lòng điền MSSV của bạn tại đây trước khi nộp bài]`
+- **Mã số sinh viên (MSSV):** 25150716
 - **Email:** cutrong236@gmail.com
 - **Repository GitHub:** [https://github.com/dinhtron027/KiemTraGiuaKi.git](https://github.com/dinhtron027/KiemTraGiuaKi.git)
 
