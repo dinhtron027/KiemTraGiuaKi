@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio cá nhân của Đinh Trọng - Sinh viên CNTT trường Đại học Gia Định. Bài thi thực hành giữa kỳ học phần Lập trình Web (14113015).">
+  <meta name="author" content="Đinh Trọng">
+  <title>Đinh Trọng | Portfolio Cá Nhân - Lập Trình Web (14113015)</title>
+
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Compiled CSS từ file SCSS (Bắt buộc liên kết style.css) -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header & Navigation Bar -->
+  <header class="site-header" id="site-header">
+    <div class="container header-container">
+      <a href="#hero" class="brand-logo" aria-label="Về trang chủ Đinh Trọng">
+        Đinh Trọng<span class="brand-dot">.dev</span>
+      </a>
+
+      <!-- Navigation links -->
+      <nav class="navbar" id="navbar" aria-label="Điều hướng chính">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#hero" class="nav-link active">Trang chủ</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">Giới thiệu</a></li>
+          <li class="nav-item"><a href="#skills" class="nav-link">Kỹ năng</a></li>
+          <li class="nav-item"><a href="#education" class="nav-link">Học vấn</a></li>
+          <li class="nav-item"><a href="#projects" class="nav-link">Dự án</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link">Liên hệ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header actions (Dark Mode Toggle + Mobile Menu Button) -->
+      <div class="header-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Chuyển đổi giao diện sáng/tối" title="Chuyển đổi Dark / Light mode">
+          <span class="theme-icon" aria-hidden="true">🌙</span>
+          <span class="theme-text">Dark Mode</span>
+        </button>
+
+        <button id="nav-toggle" class="nav-toggle" type="button" aria-label="Mở menu điều hướng" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <p class="hero-greeting">👋 Xin chào, tôi là</p>
+          <h1 class="hero-title">Đinh Trọng</h1>
+          <p class="hero-role">Sinh viên Công nghệ Thông tin &amp; Frontend Developer</p>
+          <p class="hero-desc">
+            Đam mê xây dựng giao diện web chuẩn Semantic, tối ưu trải nghiệm người dùng với tư duy thiết kế hiện đại.
+            Hiện đang học tập và rèn luyện tại Đại học Gia Định, làm chủ các công nghệ nền tảng HTML5, CSS3/SCSS và JavaScript Vanilla.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">Xem các dự án</a>
+            <a href="#contact" class="btn btn-outline">Liên hệ ngay</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <div class="avatar-wrapper">
+            <img src="assets/avatar.svg" alt="Ảnh đại diện lập trình viên Đinh Trọng - Sinh viên CNTT" class="hero-avatar" width="240" height="240">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Giới thiệu bản thân</h2>
+          <p class="section-subtitle">Thông tin cá nhân, mục tiêu học tập và định hướng nghề nghiệp</p>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-card">
+            <h3 class="card-title">Mục tiêu &amp; Định hướng</h3>
+            <p>
+              Tôi là một sinh viên năm thứ 3 chuyên ngành Công nghệ Thông tin tại Trường Đại học Gia Định.
+              Mục tiêu học tập hiện tại là nắm vững toàn diện các kiến thức lập trình Web từ cơ bản đến nâng cao,
+              đặc biệt là khả năng viết mã nguồn sạch, chuẩn semantic và responsive trên mọi thiết bị.
+            </p>
+            <p>
+              Về định hướng tương lai, tôi hướng tới việc trở thành một Chuyên viên Phát triển Frontend chuyên nghiệp,
+              có khả năng giải quyết các bài toán giao diện phức tạp và xây dựng sản phẩm chất lượng cao phục vụ cộng đồng.
+            </p>
+          </article>
+
+          <article class="about-card">
+            <h3 class="card-title">Thông tin cá nhân</h3>
+            <ul class="personal-info-list">
+              <li><strong>Họ và tên:</strong> <span>Đinh Trọng</span></li>
+              <li><strong>Chuyên ngành:</strong> <span>Công nghệ Thông tin (CNTT)</span></li>
+              <li><strong>Cơ sở đào tạo:</strong> <span>Trường Đại học Gia Định</span></li>
+              <li><strong>Email:</strong> <span>cutrong236@gmail.com</span></li>
+              <li><strong>Số điện thoại:</strong> <span>0987 654 321</span></li>
+              <li><strong>Nơi sinh sống:</strong> <span>TP. Hồ Chí Minh, Việt Nam</span></li>
+              <li><strong>Sở thích:</strong> <span>Học công nghệ mới, lập trình web, nghe nhạc</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Kỹ năng chuyên môn</h2>
+          <p class="section-subtitle">Danh sách kỹ năng được render động bằng JavaScript từ mảng object tĩnh (map &amp; filter)</p>
+        </div>
+
+        <!-- Filter tabs for map/filter demonstration -->
+        <div class="skills-filter" role="tablist" aria-label="Bộ lọc phân loại kỹ năng">
+          <button type="button" class="filter-btn active" data-filter="all">Tất cả</button>
+          <button type="button" class="filter-btn" data-filter="Frontend">Frontend</button>
+          <button type="button" class="filter-btn" data-filter="Programming">Programming</button>
+          <button type="button" class="filter-btn" data-filter="Tools">Tools</button>
+        </div>
+
+        <!-- Container for JavaScript dynamic DOM rendering -->
+        <div id="skills-container" class="skills-grid" aria-live="polite">
+          <!-- Nội dung do JavaScript render bằng createElement và textContent -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education-section" id="education">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Quá trình học tập</h2>
+          <p class="section-subtitle">Tóm tắt các mốc thời gian và kết quả tích lũy kiến thức</p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="education-table">
+            <caption>Bảng thông tin quá trình học tập và học phần tích lũy</caption>
+            <thead>
+              <tr>
+                <th scope="col">Giai đoạn</th>
+                <th scope="col">Cơ sở đào tạo</th>
+                <th scope="col">Chuyên ngành / Môn học</th>
+                <th scope="col">Trạng thái / Đánh giá</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2022 - Hiện tại</td>
+                <td>Trường Đại học Gia Định (GDU)</td>
+                <td>Công nghệ Thông tin (Hệ chính quy)</td>
+                <td>Sinh viên năm 3 - Kết quả học tập Khá/Giỏi</td>
+              </tr>
+              <tr>
+                <td>Học kỳ hiện tại</td>
+                <td>Khoa Công nghệ Thông tin</td>
+                <td>Lập trình Web (Mã HP: 14113015)</td>
+                <td>Hoàn thành Chương 1 đến Chương 5 (HTML5, SCSS, JS)</td>
+              </tr>
+              <tr>
+                <td>2023 - 2024</td>
+                <td>Khóa học chuyên đề thực hành</td>
+                <td>Cấu trúc Dữ liệu &amp; Cơ sở Dữ liệu</td>
+                <td>Hoàn thành đồ án môn học đạt loại Giỏi</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Dự án nổi bật</h2>
+          <p class="section-subtitle">Dữ liệu được đọc qua Fetch API và async/await từ file js/data.json</p>
+        </div>
+
+        <!-- Container for JavaScript Fetch rendering -->
+        <div id="projects-container" class="projects-grid" aria-live="polite">
+          <p class="loading-text">Đang tải danh sách dự án...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Liên hệ với tôi</h2>
+          <p class="section-subtitle">Hãy gửi thông điệp hoặc lời nhắn, tôi sẽ phản hồi sớm nhất có thể</p>
+        </div>
+
+        <div class="contact-wrapper">
+          <form id="contact-form" class="contact-form" novalidate>
+            <!-- Thông báo phản hồi Form (Thành công / Thất bại) -->
+            <div id="form-message" class="form-message" role="alert" aria-live="polite"></div>
+
+            <!-- Họ và tên: type="text" -->
+            <div class="form-group">
+              <label for="fullname">Họ và tên <span class="required" aria-hidden="true">*</span></label>
+              <input type="text" id="fullname" name="fullname" required minlength="2" placeholder="Ví dụ: Nguyễn Văn A" autocomplete="name">
+              <span class="error-text" id="fullname-error" aria-live="polite"></span>
+            </div>
+
+            <!-- Email: type="email" -->
+            <div class="form-group">
+              <label for="email">Địa chỉ Email <span class="required" aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required placeholder="name@example.com" autocomplete="email">
+              <span class="error-text" id="email-error" aria-live="polite"></span>
+            </div>
+
+            <!-- Số điện thoại: type="tel" với pattern -->
+            <div class="form-group">
+              <label for="phone">Số điện thoại <span class="required" aria-hidden="true">*</span></label>
+              <input type="tel" id="phone" name="phone" required pattern="^(0|\+84)[3|5|7|8|9][0-9]{8}$" placeholder="Ví dụ: 0912345678" autocomplete="tel">
+              <span class="error-text" id="phone-error" aria-live="polite"></span>
+            </div>
+
+            <!-- Ngày liên hệ mong muốn: type="date" -->
+            <div class="form-group">
+              <label for="contact-date">Ngày liên hệ mong muốn <span class="required" aria-hidden="true">*</span></label>
+              <input type="date" id="contact-date" name="contactDate" required>
+              <span class="error-text" id="date-error" aria-live="polite"></span>
+            </div>
+
+            <!-- Nội dung liên hệ: textarea -->
+            <div class="form-group">
+              <label for="message">Nội dung liên hệ <span class="required" aria-hidden="true">*</span></label>
+              <textarea id="message" name="message" rows="5" required minlength="10" placeholder="Nhập nội dung trao đổi hoặc lời nhắn (tối thiểu 10 ký tự)..."></textarea>
+              <span class="error-text" id="message-error" aria-live="polite"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-submit" id="submit-btn">
+              Gửi thông tin liên hệ
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <p class="copyright">
+        &copy; 2025 Đinh Trọng. Bài thi thực hành giữa kỳ Lập trình Web (14113015) - Trường Đại học Gia Định.
+      </p>
+      <a href="#hero" class="back-to-top" aria-label="Cuộn lên đầu trang">↑ Đầu trang</a>
+    </div>
+  </footer>
+
+  <!-- File JavaScript xử lý logic -->
+  <script src="js/script.js"></script>
+</body>
+</html>
