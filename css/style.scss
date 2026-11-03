@@ -1,0 +1,1119 @@
+// ==========================================
+// PORTFOLIO CÁ NHÂN - ĐINH TRỌNG (14113015)
+// SCSS SOURCE FILE: css/style.scss
+// ==========================================
+
+// 1. SCSS VARIABLES
+$primary-color: #4f46e5;
+$primary-hover: #4338ca;
+$primary-light: #e0e7ff;
+$secondary-color: #06b6d4;
+$accent-color: #f59e0b;
+$success-color: #10b981;
+$danger-color: #ef4444;
+
+// Light Mode Theme Colors
+$bg-color: #f8fafc;
+$card-bg: #ffffff;
+$text-color: #0f172a;
+$text-muted: #64748b;
+$border-color: #e2e8f0;
+$input-bg: #ffffff;
+
+// Dark Mode Theme Colors
+$dark-bg-color: #0f172a;
+$dark-card-bg: #1e293b;
+$dark-text-color: #f8fafc;
+$dark-text-muted: #94a3b8;
+$dark-border-color: #334155;
+$dark-input-bg: #0f172a;
+
+// Typography & Dimensions
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$border-radius-sm: 6px;
+$border-radius: 12px;
+$border-radius-lg: 16px;
+$transition-default: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+$box-shadow-hover: 0 10px 15px -3px rgba(79, 70, 229, 0.15), 0 4px 6px -4px rgba(79, 70, 229, 0.1);
+
+// 2. MIXINS
+@mixin flex-layout($justify: flex-start, $align: center, $direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin card-surface($padding: 1.75rem) {
+  background-color: $card-bg;
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+  padding: $padding;
+  box-shadow: $box-shadow;
+  transition: $transition-default;
+}
+
+@mixin button-base($bg: $primary-color, $color: #ffffff) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $bg;
+  color: $color;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: $border-radius-sm;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: $transition-default;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $box-shadow-hover;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// 3. GLOBAL RESET & BOX MODEL
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: $font-family;
+  background-color: $bg-color;
+  color: $text-color;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+// 4. UTILITY & CONTAINER
+.container {
+  width: 100%;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+
+  .section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $text-color;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, $primary-color, $secondary-color);
+      border-radius: 2px;
+    }
+  }
+
+  .section-subtitle {
+    margin-top: 0.5rem;
+    color: $text-muted;
+    font-size: 0.95rem;
+  }
+}
+
+// 5. HEADER & NAVBAR (FLEXBOX)
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba($card-bg, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid $border-color;
+  transition: $transition-default;
+
+  .header-container {
+    @include flex-layout(space-between, center);
+    height: 70px;
+  }
+
+  .brand-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $text-color;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+
+    .brand-dot {
+      color: $primary-color;
+    }
+  }
+
+  .navbar {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-color: $card-bg;
+    padding: 2rem 1.5rem;
+    transition: left 0.3s ease;
+    border-top: 1px solid $border-color;
+    overflow-y: auto;
+
+    &.nav-open {
+      left: 0;
+    }
+
+    .nav-list {
+      list-style: none;
+      @include flex-layout(flex-start, flex-start, column);
+      gap: 1.25rem;
+
+      .nav-item {
+        width: 100%;
+
+        .nav-link {
+          display: block;
+          color: $text-color;
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 1.1rem;
+          padding: 0.5rem 0;
+          border-bottom: 2px solid transparent;
+          transition: $transition-default;
+
+          &:hover,
+          &.active {
+            color: $primary-color;
+            padding-left: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  .header-actions {
+    @include flex-layout(flex-end, center);
+    gap: 0.75rem;
+
+    .theme-toggle-btn {
+      @include flex-layout(center, center);
+      gap: 0.4rem;
+      background: transparent;
+      border: 1px solid $border-color;
+      border-radius: 20px;
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+      color: $text-color;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: $transition-default;
+
+      &:hover {
+        background-color: $primary-light;
+        border-color: $primary-color;
+        color: $primary-color;
+      }
+    }
+
+    .nav-toggle {
+      @include flex-layout(center, center, column);
+      gap: 4px;
+      width: 38px;
+      height: 38px;
+      background: transparent;
+      border: 1px solid $border-color;
+      border-radius: $border-radius-sm;
+      cursor: pointer;
+      padding: 0;
+
+      .bar {
+        width: 20px;
+        height: 2px;
+        background-color: $text-color;
+        transition: $transition-default;
+      }
+
+      &.open {
+        .bar:nth-child(1) {
+          transform: translateY(6px) rotate(45deg);
+        }
+        .bar:nth-child(2) {
+          opacity: 0;
+        }
+        .bar:nth-child(3) {
+          transform: translateY(-6px) rotate(-45deg);
+        }
+      }
+    }
+  }
+}
+
+// 6. HERO SECTION
+.hero-section {
+  padding: 3rem 0;
+  background: radial-gradient(circle at top right, rgba($primary-color, 0.05), transparent 60%);
+
+  .hero-container {
+    @include flex-layout(center, center, column);
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .hero-content {
+    .hero-greeting {
+      font-size: 1rem;
+      font-weight: 600;
+      color: $primary-color;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      color: $text-color;
+    }
+
+    .hero-role {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $secondary-color;
+      margin-bottom: 1rem;
+    }
+
+    .hero-desc {
+      color: $text-muted;
+      font-size: 0.95rem;
+      max-width: 580px;
+      margin: 0 auto 1.75rem auto;
+    }
+
+    .hero-actions {
+      @include flex-layout(center, center);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+
+  .hero-media {
+    .avatar-wrapper {
+      position: relative;
+      display: inline-block;
+
+      .hero-avatar {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        display: block;
+        transition: transform 0.4s ease;
+
+        &:hover {
+          transform: scale(1.05) rotate(2deg);
+        }
+      }
+    }
+  }
+}
+
+// 7. BUTTONS
+.btn {
+  &.btn-primary {
+    @include button-base($primary-color, #ffffff);
+
+    &:hover {
+      background-color: $primary-hover;
+    }
+  }
+
+  &.btn-outline {
+    @include button-base(transparent, $primary-color);
+    border-color: $primary-color;
+
+    &:hover {
+      background-color: $primary-color;
+      color: #ffffff;
+    }
+  }
+
+  &.btn-submit {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1rem;
+  }
+}
+
+// 8. ABOUT SECTION
+.about-section {
+  padding: 4rem 0;
+  background-color: rgba($card-bg, 0.4);
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .about-card {
+    @include card-surface();
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: $primary-color;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid $primary-light;
+      padding-bottom: 0.5rem;
+    }
+
+    p {
+      color: $text-muted;
+      margin-bottom: 0.85rem;
+      font-size: 0.95rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .personal-info-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+
+      li {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.92rem;
+        border-bottom: 1px dashed $border-color;
+        padding-bottom: 0.4rem;
+
+        strong {
+          color: $text-color;
+        }
+
+        span {
+          color: $text-muted;
+        }
+      }
+    }
+  }
+}
+
+// 9. SKILLS SECTION (CSS GRID)
+.skills-section {
+  padding: 4rem 0;
+
+  .skills-filter {
+    @include flex-layout(center, center);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+
+    .filter-btn {
+      background-color: $card-bg;
+      border: 1px solid $border-color;
+      color: $text-muted;
+      padding: 0.5rem 1.25rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: $transition-default;
+
+      &:hover {
+        border-color: $primary-color;
+        color: $primary-color;
+      }
+
+      &.active {
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+
+    .skill-card {
+      @include card-surface(1.5rem);
+      @include flex-layout(space-between, center);
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: $box-shadow-hover;
+        border-color: rgba($primary-color, 0.4);
+      }
+
+      .skill-info {
+        .skill-name {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: $text-color;
+          margin-bottom: 0.35rem;
+        }
+
+        .skill-tag {
+          display: inline-block;
+          font-size: 0.75rem;
+          padding: 0.2rem 0.6rem;
+          border-radius: 12px;
+          background-color: $primary-light;
+          color: $primary-color;
+          font-weight: 600;
+        }
+      }
+
+      .skill-badge {
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 0.35rem 0.75rem;
+        border-radius: $border-radius-sm;
+        background-color: rgba($secondary-color, 0.12);
+        color: darken($secondary-color, 15%);
+      }
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem 1rem;
+      color: $text-muted;
+      background-color: $card-bg;
+      border-radius: $border-radius;
+      border: 1px dashed $border-color;
+    }
+  }
+}
+
+// 10. EDUCATION SECTION (SEMANTIC TABLE)
+.education-section {
+  padding: 4rem 0;
+  background-color: rgba($card-bg, 0.4);
+
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+    box-shadow: $box-shadow;
+    background-color: $card-bg;
+  }
+
+  .education-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    text-align: left;
+
+    caption {
+      padding: 0.75rem;
+      font-size: 0.85rem;
+      color: $text-muted;
+      caption-side: bottom;
+      text-align: right;
+    }
+
+    thead {
+      background: linear-gradient(90deg, rgba($primary-color, 0.08), rgba($secondary-color, 0.08));
+
+      th {
+        padding: 1rem 1.25rem;
+        font-weight: 700;
+        color: $text-color;
+        border-bottom: 2px solid $border-color;
+        white-space: nowrap;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid $border-color;
+        transition: background-color 0.2s ease;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:hover {
+          background-color: rgba($primary-color, 0.03);
+        }
+
+        td {
+          padding: 1rem 1.25rem;
+          color: $text-muted;
+
+          &:first-child {
+            font-weight: 600;
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 11. PROJECTS SECTION (CSS GRID)
+.projects-section {
+  padding: 4rem 0;
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    .project-card {
+      @include card-surface();
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &:hover {
+        transform: translateY(-6px);
+        box-shadow: $box-shadow-hover;
+        border-color: rgba($primary-color, 0.5);
+      }
+
+      .project-header {
+        @include flex-layout(space-between, center);
+        margin-bottom: 1rem;
+
+        .project-year {
+          font-size: 0.8rem;
+          font-weight: 700;
+          padding: 0.25rem 0.65rem;
+          border-radius: 20px;
+          background-color: rgba($accent-color, 0.15);
+          color: darken($accent-color, 12%);
+        }
+      }
+
+      .project-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: $text-color;
+        margin-bottom: 0.75rem;
+      }
+
+      .project-desc {
+        color: $text-muted;
+        font-size: 0.92rem;
+        margin-bottom: 1.25rem;
+        flex-grow: 1;
+      }
+
+      .project-tech {
+        margin-bottom: 1.25rem;
+        font-size: 0.85rem;
+        color: $primary-color;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        &::before {
+          content: '⚡';
+        }
+      }
+
+      .project-footer {
+        padding-top: 1rem;
+        border-top: 1px solid $border-color;
+
+        .project-link {
+          color: $primary-color;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.9rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          transition: $transition-default;
+
+          &:hover {
+            color: $primary-hover;
+            transform: translateX(4px);
+          }
+        }
+      }
+    }
+
+    .loading-text,
+    .error-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem 1.5rem;
+      border-radius: $border-radius;
+      background-color: $card-bg;
+      border: 1px solid $border-color;
+    }
+
+    .loading-text {
+      color: $text-muted;
+      font-size: 1rem;
+    }
+
+    .error-state {
+      color: $danger-color;
+      border-color: rgba($danger-color, 0.3);
+      background-color: rgba($danger-color, 0.05);
+
+      .error-title {
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+// 12. CONTACT SECTION (HTML5 FORM)
+.contact-section {
+  padding: 4rem 0;
+  background-color: rgba($card-bg, 0.4);
+
+  .contact-wrapper {
+    max-width: 640px;
+    margin: 0 auto;
+    @include card-surface(2rem);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    .form-message {
+      display: none;
+      padding: 0.85rem 1.25rem;
+      border-radius: $border-radius-sm;
+      font-size: 0.92rem;
+      font-weight: 500;
+      line-height: 1.4;
+
+      &.success {
+        display: block;
+        background-color: rgba($success-color, 0.12);
+        color: darken($success-color, 10%);
+        border: 1px solid rgba($success-color, 0.3);
+      }
+
+      &.error {
+        display: block;
+        background-color: rgba($danger-color, 0.12);
+        color: $danger-color;
+        border: 1px solid rgba($danger-color, 0.3);
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+
+      label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: $text-color;
+
+        .required {
+          color: $danger-color;
+        }
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-family: inherit;
+        font-size: 0.95rem;
+        color: $text-color;
+        background-color: $input-bg;
+        border: 1px solid $border-color;
+        border-radius: $border-radius-sm;
+        transition: $transition-default;
+
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 0 3px rgba($primary-color, 0.15);
+        }
+
+        &.invalid {
+          border-color: $danger-color;
+          background-color: rgba($danger-color, 0.02);
+
+          &:focus {
+            box-shadow: 0 0 0 3px rgba($danger-color, 0.15);
+          }
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .error-text {
+        font-size: 0.8rem;
+        color: $danger-color;
+        min-height: 1.1rem;
+      }
+    }
+  }
+}
+
+// 13. FOOTER
+.site-footer {
+  padding: 2.5rem 0;
+  background-color: $card-bg;
+  border-top: 1px solid $border-color;
+  text-align: center;
+
+  .footer-container {
+    @include flex-layout(space-between, center, column);
+    gap: 1rem;
+
+    .copyright {
+      font-size: 0.9rem;
+      color: $text-muted;
+    }
+
+    .back-to-top {
+      color: $primary-color;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: $transition-default;
+
+      &:hover {
+        color: $primary-hover;
+      }
+    }
+  }
+}
+
+// 14. DARK MODE (THEME TOGGLE VIA .dark-theme)
+body.dark-theme {
+  background-color: $dark-bg-color;
+  color: $dark-text-color;
+
+  .site-header {
+    background-color: rgba($dark-card-bg, 0.92);
+    border-color: $dark-border-color;
+
+    .brand-logo {
+      color: $dark-text-color;
+    }
+
+    .navbar {
+      background-color: $dark-card-bg;
+      border-color: $dark-border-color;
+
+      .nav-list .nav-item .nav-link {
+        color: $dark-text-color;
+
+        &:hover,
+        &.active {
+          color: $secondary-color;
+        }
+      }
+    }
+
+    .header-actions {
+      .theme-toggle-btn {
+        border-color: $dark-border-color;
+        color: $dark-text-color;
+
+        &:hover {
+          background-color: rgba($secondary-color, 0.15);
+          border-color: $secondary-color;
+          color: $secondary-color;
+        }
+      }
+
+      .nav-toggle {
+        border-color: $dark-border-color;
+
+        .bar {
+          background-color: $dark-text-color;
+        }
+      }
+    }
+  }
+
+  .section-header {
+    .section-title {
+      color: $dark-text-color;
+    }
+
+    .section-subtitle {
+      color: $dark-text-muted;
+    }
+  }
+
+  .hero-section {
+    .hero-content {
+      .hero-title {
+        color: $dark-text-color;
+      }
+
+      .hero-desc {
+        color: $dark-text-muted;
+      }
+    }
+  }
+
+  .about-section,
+  .education-section,
+  .contact-section {
+    background-color: rgba($dark-card-bg, 0.4);
+  }
+
+  .about-card,
+  .skills-grid .skill-card,
+  .projects-grid .project-card,
+  .contact-wrapper,
+  .table-responsive {
+    background-color: $dark-card-bg;
+    border-color: $dark-border-color;
+  }
+
+  .about-card {
+    .personal-info-list li {
+      border-color: $dark-border-color;
+
+      strong {
+        color: $dark-text-color;
+      }
+
+      span {
+        color: $dark-text-muted;
+      }
+    }
+  }
+
+  .skills-filter .filter-btn {
+    background-color: $dark-card-bg;
+    border-color: $dark-border-color;
+    color: $dark-text-muted;
+
+    &.active {
+      background-color: $primary-color;
+      color: #ffffff;
+    }
+  }
+
+  .skills-grid .skill-card .skill-info .skill-name {
+    color: $dark-text-color;
+  }
+
+  .education-table {
+    thead {
+      background: linear-gradient(90deg, rgba($primary-color, 0.2), rgba($secondary-color, 0.2));
+
+      th {
+        color: $dark-text-color;
+        border-color: $dark-border-color;
+      }
+    }
+
+    tbody tr {
+      border-color: $dark-border-color;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.04);
+      }
+
+      td {
+        color: $dark-text-muted;
+      }
+    }
+  }
+
+  .projects-grid .project-card {
+    .project-title {
+      color: $dark-text-color;
+    }
+
+    .project-desc {
+      color: $dark-text-muted;
+    }
+
+    .project-footer {
+      border-color: $dark-border-color;
+    }
+  }
+
+  .contact-form .form-group {
+    label {
+      color: $dark-text-color;
+    }
+
+    input,
+    textarea {
+      background-color: $dark-input-bg;
+      border-color: $dark-border-color;
+      color: $dark-text-color;
+
+      &:focus {
+        border-color: $secondary-color;
+        box-shadow: 0 0 0 3px rgba($secondary-color, 0.2);
+      }
+    }
+  }
+
+  .site-footer {
+    background-color: $dark-card-bg;
+    border-color: $dark-border-color;
+
+    .copyright {
+      color: $dark-text-muted;
+    }
+  }
+}
+
+// 15. RESPONSIVE BREAKPOINTS (MOBILE-FIRST)
+
+// Breakpoint 1: Tablet (min-width: 768px)
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+
+  .hero-section {
+    padding: 5rem 0;
+
+    .hero-container {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+
+    .hero-content {
+      flex: 1;
+
+      .hero-desc {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .hero-actions {
+        justify-content: flex-start;
+      }
+    }
+
+    .hero-media {
+      flex-shrink: 0;
+
+      .avatar-wrapper .hero-avatar {
+        width: 230px;
+        height: 230px;
+      }
+    }
+  }
+
+  .about-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .about-card .personal-info-list li {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .site-footer .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+// Breakpoint 2: Desktop (min-width: 1024px)
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1000px;
+  }
+
+  .site-header {
+    .nav-toggle {
+      display: none !important;
+    }
+
+    .navbar {
+      position: static;
+      width: auto;
+      height: auto;
+      background: transparent;
+      padding: 0;
+      border: none;
+      overflow-y: visible;
+
+      .nav-list {
+        flex-direction: row;
+        gap: 1.75rem;
+
+        .nav-item {
+          width: auto;
+
+          .nav-link {
+            font-size: 0.95rem;
+            padding: 0.25rem 0;
+
+            &:hover,
+            &.active {
+              padding-left: 0;
+              border-bottom-color: $primary-color;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .hero-section .hero-media .avatar-wrapper .hero-avatar {
+    width: 260px;
+    height: 260px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
